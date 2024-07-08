@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>SmartInterviewerX</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .btn-modern {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-modern:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.4);
+        }
+
+        .jumbotron {
+            background-image: url('assets/img/darkbackground.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 0;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .jumbotron h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron p {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .features {
+            background-color: #fff;
+            padding: 60px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            color: #2575fc;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+    </style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to check if user is logged in
+        function checkLoginStatus() {
+            fetch('check_login.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data.logged_in) {
+                        // User is not logged in, redirect to index.html
+                        window.location.href = 'index.php';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                    // Handle error gracefully, e.g., show a message or redirect
+                    window.location.href = 'index.php'; // Redirect to index.html on error
+                });
+        }
+
+        // Call the function to check login status when the page loads
+        checkLoginStatus();
+    });
+</script>
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+            <a href="frontpage.html" class="logo d-flex align-items-center">
+                <h1 class="d-flex align-items-center">SmartRecruiterX</h1>
+            </a>
+
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="postad.html">Post Advertisement</a></li>
+                    <li><a href="processcv.html">Process Resume</a></li>
+                    <li><a href="jobs.php">View Data Analytics of Resumes</a></li>
+                    <li><a href="interviewer-profile.php">View Interviewer</a></li>
+                    <li><a href="candidate-pi.php">View Candidates</a></li>
+                    <li><a href="logout.html">Logout</a></li>
+                </ul>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Jumbotron Section ======= -->
+        <section id="jumbotron" class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Explore Our Smart Interview Support Method Today</h2>
+                        <p>Streamline your recruitment process with SmartRecruiterX's innovative tools and analytics.</p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Jumbotron Section -->
+
+        <!-- ======= Features Section ======= -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-item">
+                            <i class="bi bi-briefcase"></i>
+          
+                            <p>Create and publish job ads effortlessly.</p>
+                            <br>
+                            <a href="postad.html" class="btn-modern">Post Advertisement</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-item">
+                            <i class="bi bi-file-earmark-person"></i>
+                          
+                            <p>Manage and evaluate candidate resumes.</p>
+                            <br>
+                            <a href="processcv.html" class="btn-modern">Process Resumes</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-item">
+                            <i class="bi bi-bar-chart"></i>
+                          
+                            <p>Analyze data trends from candidate resumes.</p>
+                            <br>
+                            <a href="jobs.php" class="btn-modern">View Data Anaytics of Resumes</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature-item">
+                            <i class="bi bi-file-person"></i>
+                          
+                            <p>Tell something about you.</p>
+                            <br>
+                            <a href="aboutyou.html" class="btn-modern">About You</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Features Section -->
+
+    </main><!-- End Main -->
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Smart Interview Support Method</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .card {
+      background-color: #007bff; /* Blue background */
+      color: white; /* White text color */
+    }
+
+    .progress-bar {
+      background: linear-gradient(to right, black, red); /* Gradient from black to red */
+    }
+
+    .progress-bar-success {
+      background: linear-gradient(to right, black, green); /* Gradient from black to green */
+    }
+  </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Function to check if user is logged in
+      function checkLoginStatus() {
+          fetch('check_login.php')
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  if (!data.logged_in) {
+                      // User is not logged in, redirect to index.html
+                      window.location.href = 'index.php';
+                  }
+              })
+              .catch(error => {
+                  console.error('Error checking login status:', error);
+                  // Handle error gracefully, e.g., show a message or redirect
+                  window.location.href = 'index.php'; // Redirect to index.html on error
+              });
+      }
+
+      // Call the function to check login status when the page loads
+      checkLoginStatus();
+  });
+</script>  
+</head>
+
+<body class="page-Process CV">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.php" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="d-flex align-items-center">Smart Interview Support Method</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/processcv-header.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Evaluation Results</h2>
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Evaluation Results</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Evaluation Results Section ======= -->
+    <section id="evaluation-results" class="evaluation-results">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Evaluation Results</h2>
+        </div>
+
+        <div class="row gy-5">
+          <!-- Structuring Summary of Resume -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Structuring Summary of Resume</h5>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%;">Process finished successfully 100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ego Analysis -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Ego Analysis</h5>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 50%;">Resumes are in process 50%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interpersonal Skills Evaluation -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Interpersonal Skills Evaluation</h5>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 50%;">Resumes are in process 50%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommending Questions -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Recommending Questions</h5>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 50%;">Resumes are in process 50%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Evaluation Results Button -->
+          <div class="col-12 text-center">
+            <a href="processcv.html" class="btn btn-primary">Return</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Evaluation Results Section -->
+
+  </main><!-- End #main -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // Simulate fetching data from the database
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch process data from the server (this is a placeholder)
+      const processResults = {
+        structuringSummary: 100,
+        egoAnalysis: 50,
+        interpersonalSkills: 50,
+        recommendingQuestions: 50
+      };
+
+      // Update progress bars
+      document.querySelector('.card-body .progress-bar-success').style.width = processResults.structuringSummary + '%';
+      document.querySelector('.card-body .progress-bar-success').textContent = 'Process finished successfully ' + processResults.structuringSummary + '%';
+
+      document.querySelector('.card:nth-child(2) .progress-bar').style.width = processResults.egoAnalysis + '%';
+      document.querySelector('.card:nth-child(2) .progress-bar').textContent = 'Resumes are in process ' + processResults.egoAnalysis + '%';
+
+      document.querySelector('.card:nth-child(3) .progress-bar').style.width = processResults.interpersonalSkills + '%';
+      document.querySelector('.card:nth-child(3) .progress-bar').textContent = 'Resumes are in process ' + processResults.interpersonalSkills + '%';
+
+      document.querySelector('.card:nth-child(4) .progress-bar').style.width = processResults.recommendingQuestions + '%';
+      document.querySelector('.card:nth-child(4) .progress-bar').textContent = 'Resumes are in process ' + processResults.recommendingQuestions + '%';
+    });
+  </script>
+
+</body>
+
+</html>

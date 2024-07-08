@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Data Analysis of Resumes</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #chartContainer {
+      max-width: 800px;
+      margin: 50px auto;
+    }
+
+    .charts-container {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .chart-card {
+      width: calc(50% - 20px);
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body class="page-view-analytics">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="d-flex align-items-center">SmartRecruiterX</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="frontpage.html">Home</a></li>
+          <li><a href="postad.html">Post Advertisement</a></li>
+          
+          
+          <li><a href="View_Data_Analysis_Of_Resumes.html">View Data Analytics of Resumes</a></li>
+          
+          <li><a href="candidate-pi.php">View Candidate</a></li>
+          <li><a href="logout.html">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/darkbackground.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+        <h2>View Data Analytics Of Resumes</h2>
+        <ol>
+          <li><a href="frontpage.html">Home</a></li>
+          <li>View Data Analytics Of Resumes</li>
+        </ol>
+      </div>
+    </div>
+
+    <section id="view-analytics" class="view-analytics">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>View Data Analytics Of Resumes</h2>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <h2>Internship Position Overview</h2>
+          <table id="internshipTable">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Number of Applicants</th>
+                <th>Status of Applications</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table rows will be dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="chartContainer">
+          <h2>Candidate Geographic Distribution</h2>
+          <canvas id="districtChart"></canvas>
+        </div>
+
+        <div class="charts-container">
+          <div class="chart-card">
+            <div>
+              <h3>Education Levels</h3>
+              <canvas id="educationLevelsChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div>
+              <h3>Fields of Study</h3>
+              <canvas id="fieldsOfStudyChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div>
+              <h3>Educational Institutions</h3>
+              <canvas id="institutionsChart"></canvas>
+              <div id="institutionLegend"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a href="Special_Analytics_of_Resumes.php" class="btn btn-secondary">Go to Special Analysis Page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Function to generate random colors
+      function generateRandomColors(count) {
+        const colors = [];
+        for (let i = 0; i < count; i++) {
+          const color = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)`;
+          colors.push(color);
+        }
+        return colors;
+      }
+
+      // Function to fetch data and render charts
+      function fetchDataAndRenderCharts() {
+        // Fetch data for internship table and district chart
+        fetch("View_Data_Analysis_Of_Resumes.php")
+          .then(response => response.json())
+          .then(data => {
+            // Populate internship table
+            const internshipTable = document.getElementById("internshipTable").getElementsByTagName("tbody")[0];
+            for (const [jobTitle, details] of Object.entries(data.table)) {
+              const row = internshipTable.insertRow();
+              const jobTitleCell = row.insertCell(0);
+              jobTitleCell.textContent = jobTitle;
+              const numApplicantsCell = row.insertCell(1);
+              numApplicantsCell.textContent = details.Num_Applicants;
+              const statusDistributionCell = row.insertCell(2);
+              statusDistributionCell.textContent = Object.entries(details.Status_Distribution)
+                .map(([status, count]) => `${status}: ${count}`)
+                .join(", ");
+            }
+
+            // Render district chart
+            const districtCtx = document.getElementById("districtChart").getContext("2d");
+            console.log('Data', data)
+            new Chart(districtCtx, {
+              type: 'bar',
+              data: {
+                labels: data.chart.labels,
+                datasets: data.chart.datasets.map((dataset, index) => ({
+                  ...dataset,
+                  backgroundColor: `rgba(0, 123, 255, 0.5)`, // Use a specific color for consistency
+                  borderColor: "rgba(0, 0, 0, 0.1)", // Use a light border color for contrast
+                  borderWidth: 1
+                }))
+              },
+              options: {
+                responsive: true,
+                scales: {
+                  x: {
+                    stacked: true,
+                    title: {
+                      display: true,
+                      text: 'District Names'
+                    }
+                  },
+                  y: {
+                    stacked: true,
+                    ticks: {
+                      beginAtZero: true,
+                      stepSize: 1 // Use integer values for y-axis
+                    },
+                    title: {
+                      display: true,
+                      text: 'Number of Candidates'
+                    }
+                  }
+                },
+                plugins: {
+                  legend: {
+                    display: false // Disable the legend
+                  }
+                }
+              }
+            });
+
+            const educationLevelsCtx = document.getElementById('educationLevelsChart').getContext('2d');
+            // Extract labels and values
+            const pie_chart_labels = data.educationLevels.map(item => item.label);
+            const pie_chart_values = data.educationLevels.map(item => item.value);
+
+            new Chart(educationLevelsCtx, {
+              type: 'pie',
+              data: {
+                labels: pie_chart_labels,
+                datasets: [{
+                  data: pie_chart_values,
+                  backgroundColor: generateRandomColors(pie_chart_labels.length),
+                }]
+              }
+            });
+
+            // Fields of Study Chart
+            const fieldsOfStudyCtx = document.getElementById('fieldsOfStudyChart').getContext('2d');
+            const bar_chart_labels = data.fieldsOfStudy.map(item => item.label);
+            const bar_chart_values = data.fieldsOfStudy.map(item => item.value);
+
+            new Chart(fieldsOfStudyCtx, {
+              type: 'bar',
+              data: {
+                labels: bar_chart_labels,
+                datasets: [{
+                  data: bar_chart_values,
+                  backgroundColor: generateRandomColors(bar_chart_labels.length), // Correct length passed here
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      precision: 0 // Use integers for y-axis ticks
+                    }
+                  }
+                },
+                plugins: {
+                  legend: {
+                    display: true, // Enable legend to show labels
+                    labels: {
+                      generateLabels: function (chart) {
+                        const datasets = chart.data.datasets;
+                        return chart.data.labels.map((label, index) => {
+                          return {
+                            text: label,
+                            fillStyle: datasets[0].backgroundColor[index],
+                            hidden: false,
+                            index: index
+                          };
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            });
+
+            // Fields of Study Chart
+            const institutionsChartCtx = document.getElementById('institutionsChart').getContext('2d');
+            const institution_bar_chart_labels = data.institutions.map(item => item.label);
+            const institution_bar_chart_values = data.institutions.map(item => item.value);
+
+            new Chart(institutionsChartCtx, {
+              type: 'bar',
+              data: {
+                labels: institution_bar_chart_labels,
+                datasets: [{
+                  data: institution_bar_chart_values,
+                  backgroundColor: generateRandomColors(institution_bar_chart_values.length), // Correct length passed here
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      precision: 0 // Use integers for y-axis ticks
+                    }
+                  }
+                },
+                plugins: {
+                  legend: {
+                    display: true, // Enable legend to show labels
+                    labels: {
+                      generateLabels: function (chart) {
+                        const datasets = chart.data.datasets;
+                        return chart.data.labels.map((label, index) => {
+                          return {
+                            text: label,
+                            fillStyle: datasets[0].backgroundColor[index],
+                            hidden: false,
+                            index: index
+                          };
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            });
+
+
+          })
+          .catch(error => console.error("Error fetching data:", error));
+
+        // // Fetch data for educational charts
+        // fetch("Charts2.php")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         // Education Levels Chart
+        //         const educationLevelsCtx = document.getElementById('educationLevelsChart').getContext('2d');
+        //         new Chart(educationLevelsCtx, {
+        //             type: 'pie',
+        //             data: {
+        //                 labels: Object.keys(data.educationLevels),
+        //                 datasets: [{
+        //                     data: Object.values(data.educationLevels),
+        //                     backgroundColor: generateRandomColors(Object.keys(data.educationLevels).length),
+        //                 }]
+        //             }
+        //         });
+
+        //         // Fields of Study Chart
+        //         const fieldsOfStudyCtx = document.getElementById('fieldsOfStudyChart').getContext('2d');
+        //         new Chart(fieldsOfStudyCtx, {
+        //             type: 'bar',
+        //             data: {
+        //                 labels: Object.keys(data.fieldsOfStudy),
+        //                 datasets: [{
+        //                     data: Object.values(data.fieldsOfStudy),
+        //                     backgroundColor: generateRandomColors(Object.keys(data.fieldsOfStudy).length),
+        //                 }]
+        //             },
+        //             options: {
+        //                 scales: {
+        //                     y: {
+        //                         beginAtZero: true,
+        //                         ticks: {
+        //                             precision: 0 // Use integers for y-axis ticks
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         });
+
+        //         // Categorize institutions and assign colors
+        //         const governmentInstitutions = [
+        //             'University of Colombo', 'University of Peradeniya', 'University of Moratuwa',
+        //             'University of Sri Jayewardenepura', 'University of Kelaniya', 'University of Jaffna',
+        //             'Eastern University, Sri Lanka', 'Wayamba University of Sri Lanka', 'Rajarata University of Sri Lanka',
+        //             'South Eastern University of Sri Lanka', 'Sabaragamuwa University of Sri Lanka'
+        //         ];
+
+        //         const privateInstitutions = [
+        //             'SLIIT', 'IIT', 'NSBM', 'Horizon Campus', 'CINEC', 'Royal Institute of Colombo'
+        //         ];
+
+        //         const otherInstitutions = [
+        //             'Open University of Sri Lanka', 'SLIATE'
+        //         ];
+
+        //         const institutionsLabels = Object.keys(data.institutions);
+        //         const institutionsData = Object.values(data.institutions);
+        //         const institutionsColors = institutionsLabels.map(label => {
+        //             if (governmentInstitutions.includes(label)) {
+        //                 return 'rgba(75, 192, 192, 0.2)'; // Color for government institutions
+        //             } else if (privateInstitutions.includes(label)) {
+        //                 return 'rgba(255, 159, 64, 0.2)'; // Color for private institutions
+        //             } else if (otherInstitutions.includes(label)) {
+        //                 return 'rgba(153, 102, 255, 0.2)'; // Color for other institutions
+        //             } else {
+        //                 return 'rgba(201, 203, 207, 0.2)'; // Default color
+        //             }
+        //         });
+
+        //         // Educational Institutions Chart
+        //         const institutionsCtx = document.getElementById('institutionsChart').getContext('2d');
+        //         new Chart(institutionsCtx, {
+        //             type: 'bar',
+        //             data: {
+        //                 labels: institutionsLabels,
+        //                 datasets: [{
+        //                     data: institutionsData,
+        //                     backgroundColor: institutionsColors,
+        //                     borderColor: institutionsColors.map(color => color.replace('0.2', '1')),
+        //                     borderWidth: 1
+        //                 }]
+        //             },
+        //             options: {
+        //                 scales: {
+        //                     y: {
+        //                         beginAtZero: true,
+        //                         ticks: {
+        //                             precision: 0 // Use integers for y-axis ticks
+        //                         }
+        //                     }
+        //                 },
+        //                 plugins: {
+        //                     legend: {
+        //                         display: false // Disable default legend
+        //                     }
+        //                 }
+        //             }
+        //         });
+
+        //         // Custom legend
+        //         const legendContainer = document.getElementById('institutionLegend');
+        //         legendContainer.innerHTML = `
+        //             <span style="background-color: rgba(75, 192, 192, 0.2); border: 1px solid rgba(75, 192, 192, 1); padding: 5px; margin-right: 5px;">&nbsp;</span> Government Universities
+        //             <span style="background-color: rgba(255, 159, 64, 0.2); border: 1px solid rgba(255, 159, 64, 1); padding: 5px; margin-right: 5px;">&nbsp;</span> Private Universities
+        //             <span style="background-color: rgba(153, 102, 255, 0.2); border: 1px solid rgba(153, 102, 255, 1); padding: 5px; margin-right: 5px;">&nbsp;</span> Other Institutions
+        //         `;
+        //     })
+        //     .catch(error => console.error('Error fetching data:', error));
+      }
+
+      // Fetch and render data on page load
+      fetchDataAndRenderCharts();
+    });
+  </script>
+
+</body>
+
+</html>

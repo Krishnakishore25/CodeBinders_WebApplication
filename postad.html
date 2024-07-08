@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SmartRecruiterX</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- CKEditor -->
+  <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+
+  <!-- =======================================================
+  * Template Name: Smart Interview Support Method
+  * Template URL: https://bootstrapmade.com/Smart Interview Support Method-bootstrap-business-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to check if user is logged in and retrieve the email
+        function checkLoginStatus() {
+            fetch('check_login.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.logged_in) {
+                        // User is logged in, set the email in the hidden input field
+                        document.getElementById('interviewerEmail').value = data.email;
+                    } else {
+                        // User is not logged in, redirect to index.html
+                        window.location.href = 'index.php';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking login status:', error);
+                    // Handle error gracefully, e.g., show a message or redirect
+                    window.location.href = 'index.php'; // Redirect to index.html on error
+                });
+        }
+
+        // Call the function to check login status when the page loads
+        checkLoginStatus();
+    });
+  </script>  
+</head>
+
+<body class="page-Post Ad">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="frontpage.html" class="logo d-flex align-items-center">
+        <h1 class="d-flex align-items-center">SmartRecruiterX</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="frontpage.html">Home</a></li>
+          <li><a href="postad.html" class="active">Post Advertisement</a></li>
+          <li><a href="processcv.html">Process Resume</a></li>
+          <li><a href="jobs.php">View Data Analytics of Resumes</a></li>
+          <li><a href="logout.html">Logout</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/darkbackground.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Post Advertisement</h2>
+        <ol>
+          <li><a href="frontpage.html">Home</a></li>
+          <li>Post Ad</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Post Ad Section ======= -->
+    <section id="postad" class="postad">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4" data-aos="fade-up">
+            <main id="main" class="main">
+                <section id="processcv-list" class="processcv-list">
+                    <div class="container" data-aos="fade-up">
+                      <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                          <div class="card p-4">
+                            <h2 class="text-center mb-4">Post Your Advertisement</h2>
+                            <form id="postAdForm" method="POST" action="post_ad.php">
+                              <div class="mb-3">
+                                <label for="jobTitle" class="form-label">Job Title</label>
+                                <input type="text" class="form-control" id="jobTitle" name="jobTitle" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="deadline" class="form-label">Deadline</label>
+                                <input type="datetime-local" class="form-control" id="deadline" name="deadline" required>
+                              </div>
+                              <div class="mb-3">
+                                <textarea class="form-control" id="adContent" name="adContent" rows="4" required></textarea>
+                              </div>
+                              <input type="hidden" id="interviewerEmail" name="interviewerEmail">
+                              <button type="submit" class="btn btn-primary w-100">Post</button>
+                            </form>
+                            <div id="successMessage" class="alert alert-success mt-3" style="display: none;">Advertisement successfully posted!</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+            </main><!-- End Main -->
+
+            <!-- Vendor JS Files -->
+            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/vendor/aos/aos.js"></script>
+            <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+            <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+            <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+            <script src="assets/vendor/php-email-form/validate.js"></script>
+
+            <!-- Template Main JS File -->
+            <script src="assets/js/main.js"></script>
+
+            <!-- Custom JS for Post Ad -->
+            <script>
+              document.getElementById("postAdForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(this);
+                
+                fetch('post_ad.php', {
+                  method: 'POST',
+                  body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    document.getElementById("successMessage").style.display = "block";
+                    document.getElementById("postAdForm").reset();
+                  } else {
+                    //alert('Error posting advertisement. Please try again.');
+                  }
+                })
+                .catch(error => {
+                  //console.error('Error:', error);
+                 // alert('Error posting advertisement. Please try again.');
+                });
+              });
+
+              // Initialize CKEditor
+              CKEDITOR.replace('adContent');
+            </script>
+          
+          </body>
+          
+          </html>

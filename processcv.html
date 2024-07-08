@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>SmartRecruiterX</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <style>
+        .job-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .job-item h3 {
+            margin-bottom: 10px;
+        }
+        .job-item .job-status {
+            font-size: 14px;
+        }
+        .job-item .process-btn {
+            margin-top: 10px;
+        }
+        .job-item .process-btn.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .progress-step {
+            margin-bottom: 10px;
+        }
+        .progress-step i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        .btn-modern {
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top:15px;
+            
+        }
+        label{
+            font-size: 30px;
+        }
+        input[type=text]{
+            font-size: 25px;
+            color:#6a0dad;
+            border:none;
+            
+        }
+        .return-btn {
+    display: flex;
+    justify-content: center;
+}
+    </style>
+</head>
+
+<body class="page-Process-CV">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="frontpage.html" class="logo d-flex align-items-center">
+                <h1 class="d-flex align-items-center">SmartRecruiterX</h1>
+            </a>
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="frontpage.html">Home</a></li>
+                    <li><a href="postad.html">Post Advertisement</a></li>
+                    <li><a href="processcv.html" class="active">Process Resume</a></li>
+                    <li><a href="jobs.php">View Data Analytics of Resumes</a></li>
+                    <li><a href="logout.html">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/darkbackground.jpg');">
+            <div class="container position-relative d-flex flex-column align-items-center">
+                <h2>Process Resumes</h2>
+                <ol>
+                    <li><a href="frontpage.html">Home</a></li>
+                    <li>Process Resumes</li>
+                </ol>
+            </div>
+        </div>
+
+        <section id="processcv-list" class="processcv-list">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Start Your Recruitment Process with SmartRecruiterX</h2>
+                </div>
+                <div class="row gy-5" id="job-items">
+                    <!-- Job items will be populated here -->
+                </div>
+
+                <div class="row gy-5 mt-5">
+                    <div class="col-12">
+                       <div class="card" id="structured-resumes" style="display: none;">
+                        <form action="questions.php" method="get">
+                            <div class="text-center " >
+                                <form id="form2" >
+                                <label for="jobTitle">Job Position:</label>
+                                <input type="text" id="jobTitle" name="jobTitle" size="30">
+                                <div class="text-center return-btn">
+                                <button class="btn btn-modern" type="submit" id="view-questions-btn"  data-mdb-ripple-init style="display:none;">View Recommended Questions</submit>
+                            </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        function submitJobTitle(jobTitle) {
+            // Set the job title value to the input field in the second form
+            document.getElementById('jobTitle').value = jobTitle;
+
+            // Submit the second form
+            //document.getElementById('form2').submit();
+
+           const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'process_saver.php?adId=' + encodeURIComponent(jobTitle), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log('PHP script executed successfully:', xhr.responseText);
+                        // Optionally handle response from PHP script
+                    } else {
+                        console.error('Error executing PHP script:', xhr.status);
+                        // Handle error if needed
+                    }
+                }
+            };
+            xhr.send();
+        }
+            
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch job items from the server
+            fetch('processcv.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const jobItemsContainer = document.getElementById('job-items');
+                        data.advertisements.forEach(ad => {
+                            const jobItem = document.createElement('div');
+                            jobItem.className = 'col-md-6';
+                            jobItem.innerHTML = `
+                            <form id="form1">
+                                <div class="job-item" id="${ad.A_ID}">
+                                    <h3 >${ad.Job_Title}</h3>
+                                    <p class="job-status">Closing Date: ${new Date(ad.Deadline).toLocaleDateString()}</p>
+                                    <p class="job-status">Recruiting State: ${new Date(ad.Deadline) < new Date() ? 'Deadline Finished' : 'Still in Progress'}</p>
+                                    <button id="process-btn-${ad.A_ID}" type="button" class="btn btn-primary process-btn ${new Date(ad.Deadline) < new Date() ? '' : 'disabled'}"
+                                    onclick="submitJobTitle('${ad.Job_Title}')">${new Date(ad.Deadline) < new Date() ? 'Process Resumes' : 'Still in Progress'}</button>
+                                     
+                        
+                                </div>
+                                </form>
+                            `;
+                            jobItemsContainer.appendChild(jobItem);
+
+                            if (new Date(ad.Deadline) < new Date()) {
+                                document.getElementById(`process-btn-${ad.A_ID}`).addEventListener('click', function() {
+                                    startProcess(ad.Job_Title);
+                                });
+                            }
+                        });
+                    } else {
+                        console.error('Error fetching advertisements:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching advertisements:', error);
+                });
+
+            function startProcess(jobTitle) {
+                const messages = [
+                    "Matching the resumes with job requirement...",
+                    "Filtering Resumes...",
+                    "Structuring the resumes...",
+                    "Evaluating Ego score...",
+                    "Evaluating Interpersonal skills..."
+                ];
+
+                const progressIcons = [
+                    '<i class="bi bi-arrow-repeat"></i>',
+                    '<i class="bi bi-arrow-repeat"></i>',
+                    '<i class="bi bi-arrow-repeat"></i>',
+                    '<i class="bi bi-arrow-repeat"></i>',
+                    '<i class="bi bi-arrow-repeat"></i>'
+                ];
+
+                const messageDiv = document.createElement('div');
+                messageDiv.id = 'message';
+
+                const structuredResumesDiv = document.getElementById('structured-resumes');
+                structuredResumesDiv.insertBefore(messageDiv, structuredResumesDiv.firstChild);
+                structuredResumesDiv.style.display = 'block';
+
+                messages.forEach((msg, index) => {
+                    setTimeout(() => {
+                        messageDiv.innerHTML = `<div class="progress-step">${progressIcons[index]} ${msg}</div>`;
+                    }, index * 2000);
+                });
+
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                    populateResumeTable(jobTitle);
+                    const viewQuestionBtn = document.getElementById('view-questions-btn');
+                
+                    viewQuestionBtn.style.display = 'block';
+                }, messages.length * 2000);
+            }
+            
+            function populateResumeTable(jobTitle) {
+                // Your code for populating resume table goes here
+                console.log(`Populating resume table for ${jobTitle}`);
+            }
+    
+                   
+        });
+
+        
+            </script>
+</body>
+
+</html>

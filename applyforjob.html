@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Apply for Job</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">`
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    .card-primary {
+      height: 100%;
+    }
+      .message {
+      display: none;
+      margin: 20px 0;
+      padding: 10px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+    .message.success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    .message.error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+  </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Function to check if user is logged in
+      function checkLoginStatus() {
+          fetch('check_login.php')
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  if (!data.logged_in) {
+                      // User is not logged in, redirect to index.html
+                      window.location.href = 'index.php';
+                  }
+              })
+              .catch(error => {
+                  console.error('Error checking login status:', error);
+                  // Handle error gracefully, e.g., show a message or redirect
+                  window.location.href = 'index.php'; // Redirect to index.html on error
+              });
+      }
+
+      // Call the function to check login status when the page loads
+      checkLoginStatus();
+
+      // Function to populate job positions
+      function populateJobPositions() {
+        fetch('ApplyForJob.php?action=get_job_titles')
+          .then(response => response.json())
+          .then(data => {
+            const applyingPosition = document.getElementById('applyingPosition');
+            applyingPosition.innerHTML = ''; // Clear existing options
+            data.forEach(job => {
+              const option = document.createElement('option');
+              option.value = job.Job_Title;
+              option.textContent = job.Job_Title;
+              applyingPosition.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error fetching job titles:', error));
+      }
+
+      // Populate job positions on page load
+      populateJobPositions();
+    });
+
+    $(document).ready(function() {
+      $("#applyForm").on('submit', function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+          url: 'ApplyForJob.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(response) {
+            $("#responseMsg").html('<div class="message success">Application submitted successfully!</div>').show();
+            $("#applyForm")[0].reset();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            $("#responseMsg").html('<div class="message error">Error: ' + jqXHR.responseText + '</div>').show();
+          }
+        });
+      });
+    });
+</script>  
+</head>
+
+<body class="page-Process CV" onload="generateRandomID()">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.php" class="logo d-flex align-items-center">
+        <h1 class="d-flex align-items-center">SmartRecruiterX</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="logoutasuser.html" class="active">Logout</a></li>
+          <li><a href="candidate-profile.php" class="active">View Your Profile</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/processcv-header.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+        <h2>Apply for Job</h2>
+        <ol>
+          <li><a href="index.php">Home</a></li>
+          <li>Apply for Job</li>
+        </ol>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    
+
+    <!-- ======= Apply for Job Section (hidden by default) ======= -->
+    <section id="apply-for-job" class="apply-for-job">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title" id="apply-for-job-title">Apply for Job</h3>
+              </div>
+              <div class="card-body">
+                <div id="responseMsg"></div>
+                <form id="applyForm" action="ApplyForJob.php" method="POST" enctype="multipart/form-data">
+                  <!-- Hidden field to hold the job position -->
+                  <input type="hidden" id="txtposition" name="txtposition">
+
+                 <!-- Contact Details -->
+                 <fieldset class="mb-3">
+                  <legend>Contact Details</legend>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email Address</label>
+                      <input type="email" class="form-control" id="txtemail" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Whatsapp Number</label>
+                      <input type="tel" class="form-control" id="txtphnno" name="phone" placeholder="Whatsapp Number" required>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Personal Details -->
+                <fieldset class="mb-3">
+                  <legend>Personal Details</legend>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="nic" class="form-label">NIC Number</label>
+                      <input type="text" class="form-control" id="txtnicno" name="nic" placeholder="NIC Number" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="civilStatus" class="form-label">Civil Status</label>
+                      <select id="civilStatus" name="civilStatus" class="form-select" id="txtcivil" required>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="dob" class="form-label">Date of Birth</label>
+                      <input type="date" class="form-control" id="txtdob" name="dob" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="district" class="form-label">District</label>
+                      <select id="district" name="district" id="txtdistrict"  class="form-select" required>
+                        <option value="Ampara">Ampara</option>
+                        <option value="Anuradhapura">Anuradhapura</option>
+                        <option value="Badulla">Badulla</option>
+                        <option value="Batticaloa">Batticaloa</option>
+                        <option value="Colombo">Colombo</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Gampaha">Gampaha</option>
+                        <option value="Hambantota">Hambantota</option>
+                        <option value="Jaffna">Jaffna</option>
+                        <option value="Kalutara">Kalutara</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Kegalle">Kegalle</option>
+                        <option value="Kilinochchi">Kilinochchi</option>
+                        <option value="Kurunegala">Kurunegala</option>
+                        <option value="Mannar">Mannar</option>
+                        <option value="Matale">Matale</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Moneragala">Moneragala</option>
+                        <option value="Mullaitivu">Mullaitivu</option>
+                        <option value="Nuwara Eliya">Nuwara Eliya</option>
+                        <option value="Polonnaruwa">Polonnaruwa</option>
+                        <option value="Puttalam">Puttalam</option>
+                        <option value="Ratnapura">Ratnapura</option>
+                        <option value="Trincomalee">Trincomalee</option>
+                        <option value="Vavuniya">Vavuniya</option>
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Applying Position -->
+                <fieldset class="mb-3">
+                  <legend>Which position do you want to apply for:</legend>
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <select id="applyingPosition" name="applyingPosition" class="form-select" required>
+                        <!-- Options will be populated by JavaScript -->
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Work Preference -->
+                <fieldset class="mb-3">
+                  <legend>Work Preference</legend>
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <select id="workPreference" name="workPreference" id="txtworkpreference" class="form-select" required>
+                        <option value="Online">Online</option>
+                        <option value="On-site">On-site</option>
+                        <option value="Hybrid">Hybrid</option>
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Additional Information -->
+                <fieldset class="mb-3">
+                  <legend>Additional Information</legend>
+                  <div class="col-md-6">
+                    <label for="workDuration" class="form-label">How long you can work?</label>
+                    <select id="txtworkduration" name="workDuration" class="form-select" required>
+                      <option value="1 month">1 month</option>
+                      <option value="3 months">3 months</option>
+                      <option value="6 months">6 months</option>
+                      <option value="1 year">1 year</option>
+                      <option value="more than 1 year">More than 1 year</option>
+                    </select>
+                  </div>
+                  <br>
+                    <div class="col-md-12">
+                      <label for="reasonForApplying" class="form-label">What are your career objectives?</label>
+                      <textarea class="form-control" id="txtreason" name="reasonForApplying" rows="4" placeholder="What are your career objectives?" required></textarea>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <!-- Resume Upload -->
+                <fieldset class="mb-3">
+                  <legend>Resume Upload</legend>
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <label for="resume" class="form-label">Upload Resume (PDF only)</label>
+                      <input type="file" class="form-control-file" id="resume" name="resume" accept="application/pdf" required>
+                    </div>
+                    
+                  </div>
+                  <br>
+                  <div class="form-inline ">
+                    <label for="randomID" class="form-label" >Reference Number:</label>
+                    <div class="col-md-2">
+                    <input type="text" class="form-control form-control-sm"   id="randomID" name="randomID"  >
+                    </div>
+                    </div>
+                  
+                </fieldset>
+                
+                <!-- Submit Button -->
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit Application</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Apply for Job Section -->
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    // script.js (if linked externally)
+function generateRandomID() {
+  // Generate a random number and convert it to a string
+  const randomNumber = Math.floor(Math.random() * 10000); // Generate a random number between 0 and 9999
+
+  // Format the random number as R####
+  const randomID = 'R' + randomNumber.toString().padStart(4, '0'); // Example: 'R' + '123'.padStart(4, '0') => 'R0123'
+
+  // Populate the input field with the formatted random ID
+  document.getElementById('randomID').value = randomID;
+}
+
+    document.querySelectorAll('.applyNowBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        const position = this.getAttribute('data-position');
+        document.getElementById('txtposition').value = position;
+        document.getElementById('apply-for-job').style.display = 'block';
+        document.getElementById('apply-for-job-title').textContent = `Apply for ${position}`;
+        window.scrollTo(0, document.getElementById('apply-for-job').offsetTop);
+      });
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.applyNowBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        const position = this.getAttribute('data-position');
+        document.getElementById('txtposition').value = position;
+        document.getElementById('apply-for-job').style.display = 'block';
+        document.getElementById('apply-for-job-title').textContent = `Apply for ${position}`;
+        window.scrollTo(0, document.getElementById('apply-for-job').offsetTop);
+      });
+    });
+
+    $(document).ready(function() {
+      $("#applyForm").on('submit', function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+          url: 'ApplyForJob.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(response) {
+            $("#responseMsg").html('<div class="message success">Application submitted successfully!</div>').show();
+            $("#applyForm")[0].reset();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            $("#responseMsg").html('<div class="message error">Error: ' + jqXHR.responseText + '</div>').show();
+          }
+        });
+      });
+
+});
+  </script>
+</body>
+
+</html>
